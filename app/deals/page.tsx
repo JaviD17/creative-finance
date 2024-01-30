@@ -1,31 +1,14 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-export default function Home() {
+const DealsPage = () => {
   const router = useRouter();
+
   return (
-    <main className="">
-      {/* Hero Section */}
-      <div className="h-[50vh] text-slate-50">
-        <h1 className="text-lg font-extralight tracking-widest text-center underline underline-offset-8">
-          JD PRIVATE EQUITIES
-        </h1>
-        <div className="h-[394px] w-[394px] mx-auto py-2">
-          <Image
-            priority
-            src={"/jd-logo-2.webp"}
-            alt="logo"
-            height={1024}
-            width={1024}
-            className="rounded-sm"
-          />
-        </div>
-      </div>
-      {/* Deals Section */}
+    <main>
       <div className="text-black-950 bg-slate-50 py-8">
         <h2 className="text-center text-3xl font-extrabold tracking-widest uppercase">
           Deals
@@ -58,7 +41,7 @@ export default function Home() {
             </div>
             <div className="w-[328px] mx-auto">
               <Button
-                className="font-extrabold tracking-widest uppercase border-black-950 shadow-2xl shadow-black-950 cursor-pointer"
+                className="font-extrabold tracking-widest uppercase border-black-950 shadow-2xl shadow-black-950"
                 variant={"outline"}
                 onClick={() => router.push("/deals/123")}
               >
@@ -94,7 +77,6 @@ export default function Home() {
               <Button
                 className="font-extrabold tracking-widest uppercase border-black-950 shadow-2xl shadow-black-950"
                 variant={"outline"}
-                onClick={() => router.push("/deals/123")}
               >
                 View Deal
               </Button>
@@ -102,7 +84,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {/* Footer */}
     </main>
   );
-}
+};
+
+export default DealsPage;
