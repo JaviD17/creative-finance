@@ -23,19 +23,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.className} bg-no-repeat bg-cover bg-center bg-fixed`}
-        style={{ backgroundImage: `url('/cf-bg.png')` }}
-      >
-        <ConvexClientProvider>
+    <ConvexClientProvider>
+      <html lang="en">
+        <body
+          className={`${inter.className} bg-no-repeat bg-cover bg-center bg-fixed`}
+          style={{ backgroundImage: `url('/cf-bg.png')` }}
+        >
           <Toaster />
           <Nav />
           <AdminNav />
           {children}
           <Footer />
-        </ConvexClientProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ConvexClientProvider>
   );
 }
