@@ -9,6 +9,7 @@ import AdminNav from "@/components/AdminNav";
 import Footer from "@/components/Footer";
 
 import "./globals.css";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,11 +30,13 @@ export default function RootLayout({
           className={`${inter.className} bg-no-repeat bg-cover bg-center bg-fixed`}
           style={{ backgroundImage: `url('/cf-bg.png')` }}
         >
-          <Toaster />
-          <Nav />
-          <AdminNav />
-          {children}
-          <Footer />
+          <Suspense fallback={<div>Data loading</div>}>
+            <Toaster />
+            <Nav />
+            <AdminNav />
+            {children}
+            <Footer />
+          </Suspense>
         </body>
       </html>
     </ConvexClientProvider>
