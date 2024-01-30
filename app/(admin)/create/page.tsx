@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { api } from "@/convex/_generated/api";
+import { Suspense } from "react";
 
 const formSchema = z.object({
   fullName: z.string().min(1),
@@ -87,149 +88,151 @@ const CreatePage = () => {
   }
 
   return (
-    <main>
-      <div className="text-black-950 bg-slate-50 py-8">
-        <h2 className="text-center text-3xl font-extrabold tracking-widest uppercase">
-          Create Deal
-        </h2>
-        {/* Form Container */}
-        <div className="py-8">
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="w-11/12 lg:max-w-lg mx-auto border border-black-950 rounded-sm py-8 shadow-2xl shadow-black-950 space-y-4"
-            >
-              <FormField
-                control={form.control}
-                name="fullName"
-                render={({ field }) => (
-                  <FormItem className=" w-[328px] mx-auto rounded-sm">
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="name"
-                        disabled={user.fullName !== ""}
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormDescription>
-                      {user.firstName
-                        ? "This field is pre-filled and deactivated by default, promoting transparency in the form."
-                        : ""}
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="emailAddress"
-                render={({ field }) => (
-                  <FormItem className=" w-[328px] mx-auto rounded-sm">
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="email"
-                        placeholder="email@example.com"
-                        disabled={user.fullName !== ""}
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormDescription>
-                      {user.primaryEmailAddress
-                        ? "This field is pre-filled and deactivated by default, promoting transparency in the form."
-                        : ""}
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="title"
-                render={({ field }) => (
-                  <FormItem className=" w-[328px] mx-auto rounded-sm">
-                    <FormLabel>Title</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Title" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      This field is for your title.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem className=" w-[328px] mx-auto rounded-sm">
-                    <FormLabel>Description</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Description..."
-                        className="resize-none"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormDescription>
-                      This field describes the deal.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="terms"
-                render={({ field }) => (
-                  <FormItem className=" w-[328px] mx-auto rounded-sm">
-                    <FormLabel>Terms</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Terms..."
-                        className="resize-none"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormDescription>
-                      This field lays out deal terms.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="amount"
-                render={({ field }) => (
-                  <FormItem className=" w-[328px] mx-auto rounded-sm">
-                    <FormLabel>Amount</FormLabel>
-                    <FormControl>
-                      <Input type="number" min={0} {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      This field is required capital amount for deal.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className="w-[328px] mx-auto">
-                <Button
-                  className="w-[328px] font-extrabold tracking-widest uppercase border border-black-950 shadow-2xl shadow-black-950"
-                  variant={"outline"}
-                  type="submit"
-                >
-                  Submit
-                </Button>
-              </div>
-            </form>
-          </Form>
+    <Suspense fallback={<p>Loading feed...</p>}>
+      <main>
+        <div className="text-black-950 bg-slate-50 py-8">
+          <h2 className="text-center text-3xl font-extrabold tracking-widest uppercase">
+            Create Deal
+          </h2>
+          {/* Form Container */}
+          <div className="py-8">
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="w-11/12 lg:max-w-lg mx-auto border border-black-950 rounded-sm py-8 shadow-2xl shadow-black-950 space-y-4"
+              >
+                <FormField
+                  control={form.control}
+                  name="fullName"
+                  render={({ field }) => (
+                    <FormItem className=" w-[328px] mx-auto rounded-sm">
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="name"
+                          disabled={user.fullName !== ""}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        {user.firstName
+                          ? "This field is pre-filled and deactivated by default, promoting transparency in the form."
+                          : ""}
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="emailAddress"
+                  render={({ field }) => (
+                    <FormItem className=" w-[328px] mx-auto rounded-sm">
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="email@example.com"
+                          disabled={user.fullName !== ""}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        {user.primaryEmailAddress
+                          ? "This field is pre-filled and deactivated by default, promoting transparency in the form."
+                          : ""}
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem className=" w-[328px] mx-auto rounded-sm">
+                      <FormLabel>Title</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Title" {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        This field is for your title.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem className=" w-[328px] mx-auto rounded-sm">
+                      <FormLabel>Description</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Description..."
+                          className="resize-none"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        This field describes the deal.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="terms"
+                  render={({ field }) => (
+                    <FormItem className=" w-[328px] mx-auto rounded-sm">
+                      <FormLabel>Terms</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Terms..."
+                          className="resize-none"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        This field lays out deal terms.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="amount"
+                  render={({ field }) => (
+                    <FormItem className=" w-[328px] mx-auto rounded-sm">
+                      <FormLabel>Amount</FormLabel>
+                      <FormControl>
+                        <Input type="number" min={0} {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        This field is required capital amount for deal.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <div className="w-[328px] mx-auto">
+                  <Button
+                    className="w-[328px] font-extrabold tracking-widest uppercase border border-black-950 shadow-2xl shadow-black-950"
+                    variant={"outline"}
+                    type="submit"
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </form>
+            </Form>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </Suspense>
   );
 };
 
