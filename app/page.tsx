@@ -10,11 +10,12 @@ export default function Home() {
   return (
     <main className="">
       {/* Hero Section */}
-      <div className="h-[50vh] text-slate-50">
+      <div className="text-slate-50">
         <h1 className="text-lg font-extralight tracking-widest text-center underline underline-offset-8">
           JD PRIVATE EQUITIES
         </h1>
-        <div className="h-[394px] w-[394px] mx-auto py-2">
+        <div className="h-[358px] w-[358px] mx-auto my-8">
+          {/* <div className="h-[394px] w-[394px] mx-auto py-2"> */}
           <Image
             priority
             src={"/jd-logo-2.webp"}
