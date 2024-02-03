@@ -8,8 +8,10 @@ export const create = mutation({
     title: v.string(),
     description: v.string(),
     terms: v.string(),
+    time: v.number(),
+    amountNeeded: v.number(),
     returnRate: v.number(),
-    amount: v.number(),
+    flatRate: v.number(),
     status: v.union(v.literal("open"), v.literal("closed")),
   },
   handler: async (ctx, args) => {
@@ -36,8 +38,10 @@ export const create = mutation({
       title: args.title,
       description: args.description,
       terms: args.terms,
+      time: args.time,
+      amountNeeded: args.amountNeeded,
       returnRate: args.returnRate,
-      amount: args.amount,
+      flatRate: args.flatRate,
       status: args.status,
     });
 
@@ -49,5 +53,12 @@ export const getAll = query({
   args: {},
   handler: async (ctx) => {
     return await ctx.db.query("deals").order("desc").collect();
+  },
+});
+
+export const get = query({
+  args: { dealId: v.id("deals") },
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.dealId);
   },
 });

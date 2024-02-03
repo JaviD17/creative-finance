@@ -31,8 +31,10 @@ const formSchema = z.object({
     message: "Order description must not be longer than 320 characters",
   }),
   terms: z.string().min(1),
+  time: z.coerce.number().nonnegative(),
+  amountNeeded: z.coerce.number().nonnegative(),
   returnRate: z.coerce.number().nonnegative(),
-  amount: z.coerce.number().nonnegative(),
+  flatRate: z.coerce.number().nonnegative(),
   status: z.union([z.literal("open"), z.literal("closed")]),
 });
 
@@ -43,7 +45,6 @@ const CreatePage = () => {
   if (!user) {
     return redirect("/");
   }
-  // router.push("/");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,8 +56,10 @@ const CreatePage = () => {
       title: "",
       description: "",
       terms: "",
+      time: 0,
+      amountNeeded: 0,
       returnRate: 0,
-      amount: 0,
+      flatRate: 0,
       status: "open",
     },
   });
@@ -64,15 +67,18 @@ const CreatePage = () => {
   const { reset } = form;
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    if (user?.publicMetadata.userAdmin) {
+    // console.log(values);
+    if (user?.publicMetadata.adminUser) {
       create({
         fullName: values.fullName,
         emailAddress: values.emailAddress,
         title: values.title,
         description: values.description,
         terms: values.terms,
+        time: values.time,
+        amountNeeded: values.amountNeeded,
         returnRate: values.returnRate,
-        amount: values.amount,
+        flatRate: values.flatRate,
         status: values.status,
       }).then((response) => {
         console.log(response);
@@ -88,7 +94,7 @@ const CreatePage = () => {
 
   return (
     <main>
-      <div className="text-black-950 bg-slate-50 py-8">
+      <div className="text-black-950 bg-black-50 py-8">
         <h2 className="text-center text-3xl font-extrabold tracking-widest uppercase">
           Create Deal
         </h2>
@@ -152,10 +158,10 @@ const CreatePage = () => {
                   <FormItem className=" w-[328px] mx-auto rounded-sm">
                     <FormLabel>Title</FormLabel>
                     <FormControl>
-                      <Input placeholder="Title" {...field} />
+                      <Input placeholder="EMD, PML, etc..." {...field} />
                     </FormControl>
                     <FormDescription>
-                      This field is for your title.
+                      This field is the title of your deal.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -169,7 +175,7 @@ const CreatePage = () => {
                     <FormLabel>Description</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Description..."
+                        placeholder="What's it for and what's the exit strategy? Is there a Top Tier TC involved?"
                         className="resize-none"
                         {...field}
                       />
@@ -189,7 +195,7 @@ const CreatePage = () => {
                     <FormLabel>Terms</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Terms..."
+                        placeholder="Terms... how long are funds needed?"
                         className="resize-none"
                         {...field}
                       />
@@ -203,15 +209,65 @@ const CreatePage = () => {
               />
               <FormField
                 control={form.control}
-                name="amount"
+                name="time"
                 render={({ field }) => (
                   <FormItem className=" w-[328px] mx-auto rounded-sm">
-                    <FormLabel>Amount</FormLabel>
+                    <FormLabel>Time needed (months)</FormLabel>
                     <FormControl>
                       <Input type="number" min={0} {...field} />
                     </FormControl>
                     <FormDescription>
-                      This field is required capital amount for deal.
+                      This field is the required time for deal. Example: if 6 -
+                      8 months, go with 8.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="amountNeeded"
+                render={({ field }) => (
+                  <FormItem className=" w-[328px] mx-auto rounded-sm">
+                    <FormLabel>Amount Needed ($)</FormLabel>
+                    <FormControl>
+                      <Input type="number" min={0} {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      Enter the required capital amount for this deal.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="returnRate"
+                render={({ field }) => (
+                  <FormItem className=" w-[328px] mx-auto rounded-sm">
+                    <FormLabel>Return Rate (%)</FormLabel>
+                    <FormControl>
+                      <Input type="number" min={0} step={0.01} {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      Example: 20% = 0.2, leave at 0% if for EMD.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="flatRate"
+                render={({ field }) => (
+                  <FormItem className=" w-[328px] mx-auto rounded-sm">
+                    <FormLabel>Flat Rate ($)</FormLabel>
+                    <FormControl>
+                      <Input type="number" min={0} {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      This field is typically for EMD. Leave at 0 if return rate
+                      is {">"} 0%
                     </FormDescription>
                     <FormMessage />
                   </FormItem>

@@ -30,11 +30,11 @@ const Nav = () => {
       label: "Deals",
       active: pathname === `/deals`,
     },
-    {
-      href: "/contact",
-      label: "Contact",
-      active: pathname === `/contact`,
-    },
+    // {
+    //   href: "/contact",
+    //   label: "Contact",
+    //   active: pathname === `/contact`,
+    // },
   ];
 
   return (
@@ -55,18 +55,17 @@ const Nav = () => {
         </div>
         <ul className="flex">
           {routes.map((route) => (
-            <li
-              key={route.href}
-              className={`h-[7.5vh] w-fit px-4 flex items-center ${
-                route.active ? "bg-black-200 " : ""
-              }`}
-            >
-              <Link href={route.href}>
+            <Link key={route.href} href={route.href}>
+              <li
+                className={`h-[7.5vh] w-fit px-4 flex items-center ${
+                  route.active ? "bg-black-200 " : ""
+                }`}
+              >
                 <p className="font-medium tracking-widest uppercase">
                   {route.label}
                 </p>
-              </Link>
-            </li>
+              </li>
+            </Link>
           ))}
         </ul>
       </div>

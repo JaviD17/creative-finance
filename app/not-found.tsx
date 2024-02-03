@@ -10,7 +10,7 @@ export default function Error() {
   const router = useRouter();
   return (
     <main className="h-screen">
-      <div className="w-11/12 lg:max-w-lg mx-auto h-[50vh] text-slate-50 flex items-center">
+      <div className="w-11/12 lg:max-w-lg mx-auto h-[50vh] text-black-50 flex items-center">
         <Alert className="">
           <RocketIcon className="h-4 w-4" />
           <AlertTitle>Heads up!</AlertTitle>

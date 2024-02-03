@@ -13,12 +13,15 @@ export default defineSchema({
     title: v.string(),
     description: v.string(),
     terms: v.string(),
+    time: v.number(),
+    amountNeeded: v.number(),
     returnRate: v.number(),
-    amount: v.number(),
+    flatRate: v.number(),
     status: v.union(
       v.literal("open"),
       v.literal("closed"),
       v.literal("completed")
     ),
+    // terms
   }).index("by_status", ["status"]),
 });

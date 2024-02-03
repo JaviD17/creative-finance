@@ -47,18 +47,17 @@ const Nav = () => {
       {/* Logo */}
       <ul className="flex w-full justify-center">
         {routes.map((route) => (
-          <li
-            key={route.href}
-            className={`h-[7.5vh] w-fit px-4 flex items-center ${
-              route.active ? "bg-black-200 " : ""
-            }`}
-          >
-            <Link href={route.href}>
+          <Link key={route.href} href={route.href}>
+            <li
+              className={`h-[7.5vh] w-fit px-4 flex items-center ${
+                route.active ? "bg-black-200 " : ""
+              }`}
+            >
               <p className="font-medium tracking-widest uppercase">
                 {route.label}
               </p>
-            </Link>
-          </li>
+            </li>
+          </Link>
         ))}
       </ul>
     </nav>
