@@ -38,54 +38,54 @@ export const options = {
   },
 };
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
+// const labels = ["January", "February", "March", "April", "May", "June", "July"];
 
-const datasets = [
-  {
-    month: "January",
-    data: 5,
-  },
-  {
-    month: "February",
-    data: 46,
-  },
-  {
-    month: "March",
-    data: 92,
-  },
-  {
-    month: "April",
-    data: 53,
-  },
-  {
-    month: "May",
-    data: 35,
-  },
-  {
-    month: "June",
-    data: 67,
-  },
-  {
-    month: "July",
-    data: 45,
-  },
-];
+// const datasets = [
+//   {
+//     month: "January",
+//     data: 5,
+//   },
+//   {
+//     month: "February",
+//     data: 46,
+//   },
+//   {
+//     month: "March",
+//     data: 92,
+//   },
+//   {
+//     month: "April",
+//     data: 53,
+//   },
+//   {
+//     month: "May",
+//     data: 35,
+//   },
+//   {
+//     month: "June",
+//     data: 67,
+//   },
+//   {
+//     month: "July",
+//     data: 45,
+//   },
+// ];
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Dataset 1",
-      data: datasets.map((data) => data.data),
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-    {
-      label: "Dataset 2",
-      data: datasets.map((data) => data.data),
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
-    },
-  ],
-};
+// export const data = {
+//   labels,
+//   datasets: [
+//     {
+//       label: "Dataset 1",
+//       data: datasets.map((data) => data.data),
+//       backgroundColor: "rgba(255, 99, 132, 0.5)",
+//     },
+//     {
+//       label: "Dataset 2",
+//       data: datasets.map((data) => data.data),
+//       backgroundColor: "rgba(53, 162, 235, 0.5)",
+//     },
+//   ],
+// };
 
 const DashboardPage = () => {
   const deals = useQuery(api.deals.getAll);
