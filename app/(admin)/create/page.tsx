@@ -42,8 +42,8 @@ const CreatePage = () => {
   const { user } = useUser();
   const create = useMutation(api.deals.create);
 
-  if (!user) {
-    return redirect("/");
+  if (!user?.publicMetadata.adminUser) {
+    redirect("/");
   }
 
   const form = useForm<z.infer<typeof formSchema>>({
