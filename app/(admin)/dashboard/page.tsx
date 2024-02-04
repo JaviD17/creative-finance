@@ -43,7 +43,6 @@ const DashboardPage = () => {
     .filter((status) => status === "completed").length;
 
   const options = {
-    // responsive: true,
     scales: {
       x: {
         beginAtZero: true,
@@ -60,6 +59,19 @@ const DashboardPage = () => {
         label: "Amount Needed / Return Rate",
         data: deals?.map((deal) => ({
           x: deal.returnRate,
+          y: deal.amountNeeded,
+        })),
+        backgroundColor: "hsla(252, 95%, 85%, 1)",
+      },
+    ],
+  };
+
+  const data3 = {
+    datasets: [
+      {
+        label: "Amount Needed / Flat Rate",
+        data: deals?.map((deal) => ({
+          x: deal.flatRate,
           y: deal.amountNeeded,
         })),
         backgroundColor: "hsla(252, 95%, 85%, 1)",
@@ -95,11 +107,8 @@ const DashboardPage = () => {
           Dashboard
         </h2>
 
-        <div className="w-11/12 lg:max-w-7xl mx-auto bg-black-50 rounded-sm p-8 mt-8">
-          <div className="lg:flex lg:justify-evenly space-y-12 lg:space-y-0">
-            {/* <div className="w-11/12 lg:max-w-md">
-              <Bar data={data} options={options} />
-            </div> */}
+        <div className="lg:max-w-7xl mx-auto pt-8">
+          <div className="flex lg:flex-row lg:flex-wrap lg:justify-evenly flex-col gap-y-4">
             <div className="w-11/12 lg:max-w-sm mx-auto bg-black-100 py-8 px-2 rounded-sm border border-black-950 shadow-2xl shadow-black-950">
               <h3 className="text-center text-xl text-black-950 font-extrabold tracking-widest uppercase">
                 Deal Status Distribution YTD
@@ -111,6 +120,12 @@ const DashboardPage = () => {
                 Amount Needed vs Return Rate YTD
               </h3>
               <Scatter options={options} data={data} />
+            </div>
+            <div className="w-11/12 lg:max-w-sm mx-auto bg-black-100 py-8 px-2 rounded-sm border border-black-950 shadow-2xl shadow-black-950">
+              <h3 className="text-center text-xl text-black-950 font-extrabold tracking-widest uppercase">
+                Amount Needed vs Flat Rate YTD
+              </h3>
+              <Scatter options={options} data={data3} />
             </div>
           </div>
         </div>
