@@ -13,9 +13,13 @@ import {
   PointElement,
 } from "chart.js";
 import { Bar, Pie, Scatter } from "react-chartjs-2";
+import { useUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import DealTable from "./components/DealTable";
+import { Doc } from "@/convex/_generated/dataModel";
 
 ChartJS.register(
   ArcElement,
@@ -30,7 +34,16 @@ ChartJS.register(
 );
 
 const DashboardPage = () => {
-  const deals = useQuery(api.deals.getAll);
+  const deals: Doc<"deals">[] | undefined = useQuery(api.deals.getAll);
+  const { user } = useUser();
+
+  if (!deals) {
+    return null;
+  }
+
+  if (!user?.publicMetadata.adminUser) {
+    redirect("/");
+  }
 
   const openDeals = deals
     ?.map((deal) => deal.status)
@@ -106,6 +119,10 @@ const DashboardPage = () => {
         <h2 className="text-center text-3xl font-extrabold tracking-widest uppercase">
           Dashboard
         </h2>
+
+        <div className="w-11/12 lg:max-w-7xl mx-auto">
+          <DealTable deals={deals} />
+        </div>
 
         <div className="lg:max-w-7xl mx-auto pt-8">
           <div className="flex lg:flex-row lg:flex-wrap lg:justify-evenly flex-col gap-y-4">
