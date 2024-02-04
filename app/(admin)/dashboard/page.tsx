@@ -117,15 +117,14 @@ const DashboardPage = () => {
     <main className="">
       <div className="text-black-950 bg-black-50 py-8">
         <h2 className="text-center text-3xl font-extrabold tracking-widest uppercase">
-          Dashboard
+          Deals
         </h2>
 
-        <div className="w-11/12 lg:max-w-7xl mx-auto">
-          <DealTable deals={deals} />
-        </div>
-
         <div className="lg:max-w-7xl mx-auto pt-8">
-          <div className="flex lg:flex-row lg:flex-wrap lg:justify-evenly flex-col gap-y-4">
+          <div className="flex lg:flex-row lg:flex-wrap lg:justify-evenly flex-col gap-y-10">
+            {/* <div className="w-11/12 lg:max-w-7xl mx-auto border border-black-950 bg-black-100 shadow-2xl shadow-black-950 rounded-sm"> */}
+              <DealTable deals={deals} />
+            {/* </div> */}
             <div className="w-11/12 lg:max-w-sm mx-auto bg-black-100 py-8 px-2 rounded-sm border border-black-950 shadow-2xl shadow-black-950">
               <h3 className="text-center text-xl text-black-950 font-extrabold tracking-widest uppercase">
                 Deal Status Distribution YTD

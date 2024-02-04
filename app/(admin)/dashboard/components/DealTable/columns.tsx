@@ -19,15 +19,39 @@ import { ColumnDef } from "@tanstack/react-table";
 
 export const columns: ColumnDef<Doc<"deals">>[] = [
   {
+    accessorKey: "_id",
+    header: "Id",
+  },
+  {
     accessorKey: "status",
     header: "Status",
   },
   {
-    accessorKey: "email",
+    accessorKey: "title",
+    header: "Type",
+  },
+  {
+    accessorKey: "fullName",
+    header: "Name",
+  },
+  {
+    accessorKey: "emailAddress",
     header: "Email",
   },
   {
-    accessorKey: "amount",
+    accessorKey: "amountNeeded",
     header: "Amount",
+  },
+  {
+    accessorKey: "flatRate",
+    header: "Return ($)",
+  },
+  {
+    accessorKey: "returnRate",
+    header: "Return (%)",
+  },
+  {
+    accessorKey: "time",
+    header: "Time (m)",
   },
 ];
