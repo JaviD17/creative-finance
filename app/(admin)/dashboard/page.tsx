@@ -123,7 +123,7 @@ const DashboardPage = () => {
         <div className="lg:max-w-7xl mx-auto pt-8">
           <div className="flex lg:flex-row lg:flex-wrap lg:justify-evenly flex-col gap-y-10">
             {/* <div className="w-11/12 lg:max-w-7xl mx-auto border border-black-950 bg-black-100 shadow-2xl shadow-black-950 rounded-sm"> */}
-              <DealTable deals={deals} />
+            <DealTable deals={deals} />
             {/* </div> */}
             <div className="w-11/12 lg:max-w-sm mx-auto bg-black-100 py-8 px-2 rounded-sm border border-black-950 shadow-2xl shadow-black-950">
               <h3 className="text-center text-xl text-black-950 font-extrabold tracking-widest uppercase">
@@ -133,13 +133,13 @@ const DashboardPage = () => {
             </div>
             <div className="w-11/12 lg:max-w-sm mx-auto bg-black-100 py-8 px-2 rounded-sm border border-black-950 shadow-2xl shadow-black-950">
               <h3 className="text-center text-xl text-black-950 font-extrabold tracking-widest uppercase">
-                Amount Needed vs Return Rate YTD
+                Amount vs Return Rate YTD
               </h3>
               <Scatter options={options} data={data} />
             </div>
             <div className="w-11/12 lg:max-w-sm mx-auto bg-black-100 py-8 px-2 rounded-sm border border-black-950 shadow-2xl shadow-black-950">
               <h3 className="text-center text-xl text-black-950 font-extrabold tracking-widest uppercase">
-                Amount Needed vs Flat Rate YTD
+                Amount vs Flat Rate YTD
               </h3>
               <Scatter options={options} data={data3} />
             </div>
