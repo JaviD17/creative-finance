@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useUser } from "@clerk/nextjs";
+import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 import {
   Form,
@@ -27,7 +28,20 @@ const ContactForm = () => {
   const { user } = useUser();
 
   if (!user) {
-    return null;
+    return (
+      <div className="bg-black-50 text-black-950 py-8 h-[50vh] flex items-center">
+        <div className="max-w-sm mx-auto space-y-4 border text-center p-8 border-black-950 shadow-2xl shadow-black-950 rounded-sm">
+          <p className="text-red-800 font-extrabold uppercase tracking-widest">
+            Sign in to view contact form.
+          </p>
+          <SignInButton>
+            <div className="active:bg-black-100 mx-auto border border-black-950 text-black-950 shadow-2xl shadow-black-950 px-3 py-1.5 rounded-sm cursor-pointer">
+              Sign in
+            </div>
+          </SignInButton>
+        </div>
+      </div>
+    );
   }
 
   const form = useForm<z.infer<typeof formSchema>>({

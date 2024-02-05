@@ -72,9 +72,11 @@ const Nav = () => {
       {/* Menu */}
       <div className="mr-4">
         <SignedOut>
-          <div className="active:bg-black-100 border border-black-950 text-black-950 shadow-2xl shadow-black-950 px-3 py-1.5 rounded-sm cursor-pointer">
-            <SignInButton />
-          </div>
+          <SignInButton>
+            <div className="active:bg-black-100 border border-black-950 text-black-950 shadow-2xl shadow-black-950 px-3 py-1.5 rounded-sm cursor-pointer">
+              Sign in
+            </div>
+          </SignInButton>
         </SignedOut>
         <SignedIn>
           <div className="shadow-2xl shadow-black-950 rounded-full">
