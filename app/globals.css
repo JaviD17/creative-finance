@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 /*  */
+/* html,
+body,
+:root {
+  margin: 0px !important;
+  margin-right: 0px !important;
+  padding: 0px !important;
+} */
+
 .cl-avatarBox {
   @apply h-12 w-12;
 }
@@ -78,4 +86,12 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+html,
+body,
+:root {
+  margin: 0px !important;
+  margin-right: 0px !important;
+  padding: 0px !important;
 }

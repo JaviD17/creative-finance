@@ -22,6 +22,21 @@ export default defineSchema({
       v.literal("closed"),
       v.literal("completed")
     ),
-    // terms
   }).index("by_status", ["status"]),
+  dealInquiries: defineTable({
+    userId: v.id("users"),
+    dealId: v.id("deals"),
+    fullName: v.string(),
+    emailAddress: v.string(),
+    subject: v.string(),
+    amount: v.string(),
+    message: v.string(),
+  }),
+  contactInquiries: defineTable({
+    userId: v.id("users"),
+    fullName: v.string(),
+    emailAddress: v.string(),
+    subject: v.string(),
+    message: v.string(),
+  }),
 });
