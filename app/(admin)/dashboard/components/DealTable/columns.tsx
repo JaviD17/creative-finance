@@ -1,6 +1,7 @@
 import { Doc, Id } from "@/convex/_generated/dataModel";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpRightFromSquare } from "lucide-react";
+import { ArrowUpRightFromSquare, Copy } from "lucide-react";
+import toast from "react-hot-toast";
 
 // const deals: {
 //   _id: Id<"deals">;
@@ -49,10 +50,27 @@ export const columns: ColumnDef<Doc<"deals">>[] = [
               />
             </div>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="w-[95.8%] rounded-sm shadow-2xl shadow-black-950 border border-black-950">
             <DialogHeader>
-              <DialogTitle>Are you absolutely sure?</DialogTitle>
-              <DialogDescription>
+              <DialogTitle className="w-full">
+                <div className="font-extrabold text-center uppercase tracking-widest">
+                  Deal View
+                </div>
+              </DialogTitle>
+              <DialogDescription
+                onClick={() => {
+                  toast.success("copied");
+                  navigator.clipboard.writeText(id);
+                }}
+                className="group hover:cursor-pointer"
+              >
+                <div className="flex items-center gap-x-1.5">
+                  <p>id: </p>
+                  <div className="border border-transparent group-hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between gap-x-3">
+                    {id}
+                    <Copy size={20} className="invisible group-hover:visible" />
+                  </div>
+                </div>
                 This action cannot be undone. This will permanently delete your
                 account and remove your data from our servers.
               </DialogDescription>
