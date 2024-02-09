@@ -26,7 +26,7 @@ import { api } from "@/convex/_generated/api";
 const formSchema = z.object({
   fullName: z.string().min(1),
   emailAddress: z.string().min(1).email(),
-  title: z.string().min(1),
+  type: z.string().min(1),
   description: z.string().min(1).max(320, {
     message: "Order description must not be longer than 320 characters",
   }),
@@ -53,7 +53,7 @@ const CreatePage = () => {
       emailAddress: user.primaryEmailAddress?.emailAddress
         ? user.primaryEmailAddress.emailAddress
         : "",
-      title: "",
+      type: "",
       description: "",
       terms: "",
       time: 0,
@@ -72,7 +72,7 @@ const CreatePage = () => {
       create({
         fullName: values.fullName,
         emailAddress: values.emailAddress,
-        title: values.title,
+        type: values.type,
         description: values.description,
         terms: values.terms,
         time: values.time,
@@ -153,15 +153,15 @@ const CreatePage = () => {
               />
               <FormField
                 control={form.control}
-                name="title"
+                name="type"
                 render={({ field }) => (
                   <FormItem className=" w-[328px] mx-auto rounded-sm">
-                    <FormLabel>Title</FormLabel>
+                    <FormLabel>Type</FormLabel>
                     <FormControl>
                       <Input placeholder="EMD, PML, etc..." {...field} />
                     </FormControl>
                     <FormDescription>
-                      This field is the title of your deal.
+                      This field is the type of your deal.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>

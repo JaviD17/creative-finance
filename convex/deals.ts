@@ -5,7 +5,7 @@ export const create = mutation({
   args: {
     fullName: v.string(),
     emailAddress: v.string(),
-    title: v.string(),
+    type: v.string(),
     description: v.string(),
     terms: v.string(),
     time: v.number(),
@@ -35,7 +35,7 @@ export const create = mutation({
       userId: user._id,
       fullName: args.fullName,
       emailAddress: args.emailAddress,
-      title: args.title,
+      type: args.type,
       description: args.description,
       terms: args.terms,
       time: args.time,

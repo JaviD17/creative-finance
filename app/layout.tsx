@@ -26,7 +26,7 @@ export default function RootLayout({
     <ConvexClientProvider>
       <html lang="en">
         <body
-          className={`${inter.className} bg-no-repeat bg-cover bg-center bg-fixed m-0 p-0 w-screen overflow-y-hidden`}
+          className={`${inter.className} bg-no-repeat bg-cover bg-center bg-fixed m-0 p-0 w-screen overflow-x-hidden`}
           style={{ backgroundImage: `url('/cf-bg.png')` }}
         >
           <Toaster />

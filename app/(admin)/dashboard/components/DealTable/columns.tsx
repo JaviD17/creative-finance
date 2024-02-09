@@ -10,7 +10,7 @@ import { format } from "date-fns";
 //   userId: Id<"users">;
 //   fullName: string;
 //   emailAddress: string;
-//   title: string;
+//   type: string;
 //   description: string;
 //   terms: string;
 //   time: number;
@@ -43,6 +43,23 @@ export const columns: ColumnDef<Doc<"deals">>[] = [
 
       const formattedTime = format(new Date(data._creationTime), "MM/dd/yyyy");
 
+      const amountNeeded = data.amountNeeded;
+      const formattedAmount = new Intl.NumberFormat("en-us", {
+        style: "currency",
+        currency: "USD",
+      }).format(amountNeeded);
+
+      const flatRate = data.flatRate;
+      const formattedFlatRate = new Intl.NumberFormat("en-us", {
+        style: "currency",
+        currency: "USD",
+      }).format(flatRate);
+
+      const returnRate = data.returnRate;
+      const formattedReturnRate = new Intl.NumberFormat("en-us", {
+        style: "percent",
+      }).format(returnRate);
+
       return (
         <Dialog>
           <DialogTrigger className="w-full">
@@ -61,31 +78,129 @@ export const columns: ColumnDef<Doc<"deals">>[] = [
                   Deal View
                 </div>
               </DialogTitle>
-              <DialogDescription className="group hover:cursor-pointer">
+              <DialogDescription className="space-y-3">
                 <div className="flex items-center gap-x-1.5">
-                  <p>id:</p>
+                  <p>Id:</p>
                   <div
                     onClick={() => {
-                      toast.success("copied");
+                      toast.success(`Copied ${id}`);
                       navigator.clipboard.writeText(id);
                     }}
-                    className="border border-transparent group-hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between gap-x-3"
+                    className="group border border-transparent hover:text-black-950 hover:bg-black-300 hover:cursor-pointer hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between gap-x-3 lg:active:scale-95"
                   >
                     {id}
                     <Copy size={20} className="invisible group-hover:visible" />
                   </div>
                 </div>
                 <div className="flex gap-x-1.5 items-center">
+                  <p>Status: </p>
+                  <p className="text-left uppercase border border-transparent px-3 py-1.5 rounded-sm">
+                    {data.status}
+                  </p>
+                </div>
+                <div className="flex gap-x-1.5 items-center">
+                  <p>Type: </p>
+                  <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
+                    {data.type}
+                  </p>
+                </div>
+                <div className="flex gap-x-1.5 items-center">
                   <p>Created On:</p>
-                  <p>{formattedTime}</p>
+                  <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
+                    {formattedTime}
+                  </p>
                 </div>
                 <div className="flex gap-x-1.5 items-center">
                   <p>Amount: </p>
-                  <p>{data.amountNeeded}</p>
+                  <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
+                    {formattedAmount}
+                  </p>
                 </div>
-                <div className="flex gap-x-1.5 items-start">
-                  <p>Terms: </p>
-                  <p>{data.terms}</p>
+                <div className="flex gap-x-1.5 items-center">
+                  <p>Time: </p>
+                  <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
+                    {data.time} months
+                  </p>
+                </div>
+                <div className="flex gap-x-1.5 items-center">
+                  <p>Flat Rate: </p>
+                  <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
+                    {formattedFlatRate}
+                  </p>
+                </div>
+                <div className="flex gap-x-1.5 items-center">
+                  <p>Return Rate: </p>
+                  <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
+                    {formattedReturnRate}
+                  </p>
+                </div>
+                <div className="flex gap-x-1.5 items-center">
+                  <p>Terms:</p>
+                  <div
+                    onClick={() => {
+                      toast.success(`Copied ${data.terms}`);
+                      navigator.clipboard.writeText(data.terms);
+                    }}
+                    className="text-left group border border-transparent hover:text-black-950 hover:bg-black-300 hover:cursor-pointer hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between lg:active:scale-95"
+                  >
+                    {data.terms}
+                    <div className="grow">
+                      <Copy
+                        size={20}
+                        className="invisible group-hover:visible"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex gap-x-1.5 items-center">
+                  <p>Description:</p>
+                  <div
+                    onClick={() => {
+                      toast.success(`Copied ${data.description}`);
+                      navigator.clipboard.writeText(data.description);
+                    }}
+                    className="text-left group border border-transparent hover:text-black-950 hover:bg-black-300 hover:cursor-pointer hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between items-start gap-x-3 lg:active:scale-95"
+                  >
+                    {data.description}
+                    <div className="grow">
+                      <Copy
+                        size={20}
+                        className="invisible group-hover:visible"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex gap-x-1.5 items-center">
+                  <p>User Id: </p>
+                  <div
+                    onClick={() => {
+                      toast.success("copied");
+                      navigator.clipboard.writeText(data.terms);
+                    }}
+                    className="group border border-transparent hover:text-black-950 hover:bg-black-300 hover:cursor-pointer hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between gap-x-3 lg:active:scale-95"
+                  >
+                    {data.userId}
+                    <Copy size={20} className="invisible group-hover:visible" />
+                  </div>
+                </div>
+                <div className="flex gap-x-1.5 items-center">
+                  <p>Name: </p>
+                  <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
+                    {data.fullName}
+                  </p>
+                </div>
+                <div className="flex gap-x-1.5 items-center">
+                  <p>Email: </p>
+                  <div
+                    onClick={() => {
+                      toast.success("copied");
+                      navigator.clipboard.writeText(data.terms);
+                    }}
+                    className="group border border-transparent hover:text-black-950 hover:bg-black-300 hover:cursor-pointer hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between gap-x-3 lg:active:scale-95"
+                  >
+                    {data.emailAddress}
+                    <Copy size={20} className="invisible group-hover:visible" />
+                  </div>
                 </div>
               </DialogDescription>
             </DialogHeader>
@@ -97,9 +212,14 @@ export const columns: ColumnDef<Doc<"deals">>[] = [
   {
     accessorKey: "status",
     header: "Status",
+    cell: ({ row }) => {
+      const status: string = row.getValue("status");
+
+      return <div className="uppercase">{status}</div>;
+    },
   },
   {
-    accessorKey: "title",
+    accessorKey: "type",
     header: "Type",
   },
   {

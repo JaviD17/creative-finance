@@ -32,7 +32,7 @@ const DealsPage = () => {
               </div>
               <div className="h-[328px] w-[328px] mx-auto py-4">
                 <h3 className="font-extrabold tracking-widest pb-1.5 uppercase">
-                  {deal.title}
+                  {deal.type}
                 </h3>
                 <div className="h-1.5 w-16 bg-black-950 rounded-sm" />
                 <p className="pt-3 text-black-600 text-pretty text-left">

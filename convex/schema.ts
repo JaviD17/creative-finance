@@ -10,7 +10,7 @@ export default defineSchema({
     userId: v.id("users"),
     fullName: v.string(),
     emailAddress: v.string(),
-    title: v.string(),
+    type: v.string(),
     description: v.string(),
     terms: v.string(),
     time: v.number(),
