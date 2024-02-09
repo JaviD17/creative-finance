@@ -2,6 +2,7 @@ import { Doc, Id } from "@/convex/_generated/dataModel";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpRightFromSquare, Copy } from "lucide-react";
 import toast from "react-hot-toast";
+import { format } from "date-fns";
 
 // const deals: {
 //   _id: Id<"deals">;
@@ -38,6 +39,9 @@ export const columns: ColumnDef<Doc<"deals">>[] = [
     header: "Id",
     cell: ({ row }) => {
       const id: Id<"deals"> = row.getValue("_id");
+      const data = row.original;
+
+      const formattedTime = format(new Date(data._creationTime), "MM/dd/yyyy");
 
       return (
         <Dialog>
@@ -57,22 +61,32 @@ export const columns: ColumnDef<Doc<"deals">>[] = [
                   Deal View
                 </div>
               </DialogTitle>
-              <DialogDescription
-                onClick={() => {
-                  toast.success("copied");
-                  navigator.clipboard.writeText(id);
-                }}
-                className="group hover:cursor-pointer"
-              >
+              <DialogDescription className="group hover:cursor-pointer">
                 <div className="flex items-center gap-x-1.5">
-                  <p>id: </p>
-                  <div className="border border-transparent group-hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between gap-x-3">
+                  <p>id:</p>
+                  <div
+                    onClick={() => {
+                      toast.success("copied");
+                      navigator.clipboard.writeText(id);
+                    }}
+                    className="border border-transparent group-hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between gap-x-3"
+                  >
                     {id}
                     <Copy size={20} className="invisible group-hover:visible" />
                   </div>
                 </div>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
+                <div className="flex gap-x-1.5 items-center">
+                  <p>Created On:</p>
+                  <p>{formattedTime}</p>
+                </div>
+                <div className="flex gap-x-1.5 items-center">
+                  <p>Amount: </p>
+                  <p>{data.amountNeeded}</p>
+                </div>
+                <div className="flex gap-x-1.5 items-start">
+                  <p>Terms: </p>
+                  <p>{data.terms}</p>
+                </div>
               </DialogDescription>
             </DialogHeader>
           </DialogContent>
