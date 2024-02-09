@@ -223,14 +223,6 @@ export const columns: ColumnDef<Doc<"deals">>[] = [
     header: "Type",
   },
   {
-    accessorKey: "fullName",
-    header: "Name",
-  },
-  {
-    accessorKey: "emailAddress",
-    header: "Email",
-  },
-  {
     accessorKey: "amountNeeded",
     header: "Amount",
     cell: ({ row }) => {
@@ -242,6 +234,10 @@ export const columns: ColumnDef<Doc<"deals">>[] = [
 
       return <div>{formatted}</div>;
     },
+  },
+  {
+    accessorKey: "time",
+    header: "Time (m)",
   },
   {
     accessorKey: "flatRate",
@@ -269,7 +265,11 @@ export const columns: ColumnDef<Doc<"deals">>[] = [
     },
   },
   {
-    accessorKey: "time",
-    header: "Time (m)",
+    accessorKey: "fullName",
+    header: "Name",
+  },
+  {
+    accessorKey: "emailAddress",
+    header: "Email",
   },
 ];
