@@ -62,7 +62,7 @@ export const columns: ColumnDef<Doc<"deals">>[] = [
 
       return (
         <Dialog>
-          <DialogTrigger className="w-full max-h-[95.8%]">
+          <DialogTrigger className="w-full max-h-[91.67%] overflow-y-scroll">
             <div className="flex flex-row justify-between group hover:cursor-pointer border border-transparent hover:border-black-950 rounded-sm transition px-3 py-1.5 hover:bg-black-300 lg:active:scale-95">
               <p className="">{id}</p>
               <ArrowUpRightFromSquare
