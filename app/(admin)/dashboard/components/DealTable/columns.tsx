@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const columns: ColumnDef<Doc<"deals">>[] = [
   {
@@ -62,7 +63,7 @@ export const columns: ColumnDef<Doc<"deals">>[] = [
 
       return (
         <Dialog>
-          <DialogTrigger className="w-full max-h-[91.67%] overflow-y-scroll">
+          <DialogTrigger className="w-full">
             <div className="flex flex-row justify-between group hover:cursor-pointer border border-transparent hover:border-black-950 rounded-sm transition px-3 py-1.5 hover:bg-black-300 lg:active:scale-95">
               <p className="">{id}</p>
               <ArrowUpRightFromSquare
@@ -71,139 +72,150 @@ export const columns: ColumnDef<Doc<"deals">>[] = [
               />
             </div>
           </DialogTrigger>
-          <DialogContent className="w-[95.8%] rounded-sm shadow-2xl shadow-black-950 border border-black-950">
-            <DialogHeader>
-              <DialogTitle className="w-full">
-                <div className="font-extrabold text-center uppercase tracking-widest">
-                  Deal View
-                </div>
-              </DialogTitle>
-              <DialogDescription className="space-y-3">
-                <div className="flex items-center gap-x-1.5">
-                  <p>Id:</p>
-                  <div
-                    onClick={() => {
-                      toast.success(`Copied ${id}`);
-                      navigator.clipboard.writeText(id);
-                    }}
-                    className="group border border-transparent hover:text-black-950 hover:bg-black-300 hover:cursor-pointer hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between gap-x-3 lg:active:scale-95"
-                  >
-                    {id}
-                    <Copy size={20} className="invisible group-hover:visible" />
+          <DialogContent className="w-[95.8%] h-[475px] rounded-sm shadow-2xl shadow-black-950 border border-black-950">
+            <ScrollArea>
+              <DialogHeader>
+                <DialogTitle className="w-full">
+                  <div className="font-extrabold text-center uppercase tracking-widest">
+                    Deal View
                   </div>
-                </div>
-                <div className="flex gap-x-1.5 items-center">
-                  <p>Status: </p>
-                  <p className="text-left uppercase border border-transparent px-3 py-1.5 rounded-sm">
-                    {data.status}
-                  </p>
-                </div>
-                <div className="flex gap-x-1.5 items-center">
-                  <p>Type: </p>
-                  <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
-                    {data.type}
-                  </p>
-                </div>
-                <div className="flex gap-x-1.5 items-center">
-                  <p>Created On:</p>
-                  <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
-                    {formattedTime}
-                  </p>
-                </div>
-                <div className="flex gap-x-1.5 items-center">
-                  <p>Amount: </p>
-                  <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
-                    {formattedAmount}
-                  </p>
-                </div>
-                <div className="flex gap-x-1.5 items-center">
-                  <p>Time: </p>
-                  <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
-                    {data.time} months
-                  </p>
-                </div>
-                <div className="flex gap-x-1.5 items-center">
-                  <p>Flat Rate: </p>
-                  <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
-                    {formattedFlatRate}
-                  </p>
-                </div>
-                <div className="flex gap-x-1.5 items-center">
-                  <p>Return Rate: </p>
-                  <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
-                    {formattedReturnRate}
-                  </p>
-                </div>
-                <div className="flex gap-x-1.5 items-center">
-                  <p>Terms:</p>
-                  <div
-                    onClick={() => {
-                      toast.success(`Copied ${data.terms}`);
-                      navigator.clipboard.writeText(data.terms);
-                    }}
-                    className="text-left group border border-transparent hover:text-black-950 hover:bg-black-300 hover:cursor-pointer hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between lg:active:scale-95"
-                  >
-                    {data.terms}
-                    <div className="grow">
+                </DialogTitle>
+                <DialogDescription className="space-y-3">
+                  <div className="flex items-center gap-x-1.5">
+                    <p>Id:</p>
+                    <div
+                      onClick={() => {
+                        toast.success(`Copied ${id}`);
+                        navigator.clipboard.writeText(id);
+                      }}
+                      className="group border border-transparent hover:text-black-950 hover:bg-black-300 hover:cursor-pointer hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between gap-x-3 lg:active:scale-95"
+                    >
+                      {id}
                       <Copy
                         size={20}
                         className="invisible group-hover:visible"
                       />
                     </div>
                   </div>
-                </div>
-                <div className="flex gap-x-1.5 items-center">
-                  <p>Description:</p>
-                  <div
-                    onClick={() => {
-                      toast.success(`Copied ${data.description}`);
-                      navigator.clipboard.writeText(data.description);
-                    }}
-                    className="text-left group border border-transparent hover:text-black-950 hover:bg-black-300 hover:cursor-pointer hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between items-start gap-x-3 lg:active:scale-95"
-                  >
-                    {data.description}
-                    <div className="grow">
+                  <div className="flex gap-x-1.5 items-center">
+                    <p>Status: </p>
+                    <p className="text-left uppercase border border-transparent px-3 py-1.5 rounded-sm">
+                      {data.status}
+                    </p>
+                  </div>
+                  <div className="flex gap-x-1.5 items-center">
+                    <p>Type: </p>
+                    <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
+                      {data.type}
+                    </p>
+                  </div>
+                  <div className="flex gap-x-1.5 items-center">
+                    <p>Created On:</p>
+                    <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
+                      {formattedTime}
+                    </p>
+                  </div>
+                  <div className="flex gap-x-1.5 items-center">
+                    <p>Amount: </p>
+                    <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
+                      {formattedAmount}
+                    </p>
+                  </div>
+                  <div className="flex gap-x-1.5 items-center">
+                    <p>Time: </p>
+                    <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
+                      {data.time} months
+                    </p>
+                  </div>
+                  <div className="flex gap-x-1.5 items-center">
+                    <p>Flat Rate: </p>
+                    <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
+                      {formattedFlatRate}
+                    </p>
+                  </div>
+                  <div className="flex gap-x-1.5 items-center">
+                    <p>Return Rate: </p>
+                    <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
+                      {formattedReturnRate}
+                    </p>
+                  </div>
+                  <div className="flex gap-x-1.5 items-center">
+                    <p>Terms:</p>
+                    <div
+                      onClick={() => {
+                        toast.success(`Copied ${data.terms}`);
+                        navigator.clipboard.writeText(data.terms);
+                      }}
+                      className="text-left group border border-transparent hover:text-black-950 hover:bg-black-300 hover:cursor-pointer hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between lg:active:scale-95"
+                    >
+                      {data.terms}
+                      <div className="grow">
+                        <Copy
+                          size={20}
+                          className="invisible group-hover:visible"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex gap-x-1.5 items-center">
+                    <p>Description:</p>
+                    <div
+                      onClick={() => {
+                        toast.success(`Copied ${data.description}`);
+                        navigator.clipboard.writeText(data.description);
+                      }}
+                      className="text-left group border border-transparent hover:text-black-950 hover:bg-black-300 hover:cursor-pointer hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between items-start gap-x-3 lg:active:scale-95"
+                    >
+                      {data.description}
+                      <div className="grow">
+                        <Copy
+                          size={20}
+                          className="invisible group-hover:visible"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex gap-x-1.5 items-center">
+                    <p>User Id: </p>
+                    <div
+                      onClick={() => {
+                        toast.success("copied");
+                        navigator.clipboard.writeText(data.terms);
+                      }}
+                      className="group border border-transparent hover:text-black-950 hover:bg-black-300 hover:cursor-pointer hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between gap-x-3 lg:active:scale-95"
+                    >
+                      {data.userId}
                       <Copy
                         size={20}
                         className="invisible group-hover:visible"
                       />
                     </div>
                   </div>
-                </div>
-                <div className="flex gap-x-1.5 items-center">
-                  <p>User Id: </p>
-                  <div
-                    onClick={() => {
-                      toast.success("copied");
-                      navigator.clipboard.writeText(data.terms);
-                    }}
-                    className="group border border-transparent hover:text-black-950 hover:bg-black-300 hover:cursor-pointer hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between gap-x-3 lg:active:scale-95"
-                  >
-                    {data.userId}
-                    <Copy size={20} className="invisible group-hover:visible" />
+                  <div className="flex gap-x-1.5 items-center">
+                    <p>Name: </p>
+                    <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
+                      {data.fullName}
+                    </p>
                   </div>
-                </div>
-                <div className="flex gap-x-1.5 items-center">
-                  <p>Name: </p>
-                  <p className="text-left border border-transparent px-3 py-1.5 rounded-sm">
-                    {data.fullName}
-                  </p>
-                </div>
-                <div className="flex gap-x-1.5 items-center">
-                  <p>Email: </p>
-                  <div
-                    onClick={() => {
-                      toast.success("copied");
-                      navigator.clipboard.writeText(data.terms);
-                    }}
-                    className="group border border-transparent hover:text-black-950 hover:bg-black-300 hover:cursor-pointer hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between gap-x-3 lg:active:scale-95"
-                  >
-                    {data.emailAddress}
-                    <Copy size={20} className="invisible group-hover:visible" />
+                  <div className="flex gap-x-1.5 items-center">
+                    <p>Email: </p>
+                    <div
+                      onClick={() => {
+                        toast.success("copied");
+                        navigator.clipboard.writeText(data.terms);
+                      }}
+                      className="group border border-transparent hover:text-black-950 hover:bg-black-300 hover:cursor-pointer hover:border-black-950 px-3 py-1.5 rounded-sm transition flex justify-between gap-x-3 lg:active:scale-95"
+                    >
+                      {data.emailAddress}
+                      <Copy
+                        size={20}
+                        className="invisible group-hover:visible"
+                      />
+                    </div>
                   </div>
-                </div>
-              </DialogDescription>
-            </DialogHeader>
+                </DialogDescription>
+              </DialogHeader>
+            </ScrollArea>
           </DialogContent>
         </Dialog>
       );
