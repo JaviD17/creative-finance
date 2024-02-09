@@ -1,6 +1,6 @@
 import { Doc, Id } from "@/convex/_generated/dataModel";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpRightFromSquare, Copy } from "lucide-react";
+import { ArrowUpRightFromSquare, Copy, MoreHorizontal } from "lucide-react";
 import toast from "react-hot-toast";
 import { format } from "date-fns";
 
@@ -33,6 +33,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export const columns: ColumnDef<Doc<"deals">>[] = [
   {
@@ -283,5 +291,39 @@ export const columns: ColumnDef<Doc<"deals">>[] = [
   {
     accessorKey: "emailAddress",
     header: "Email",
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => {
+      const data = row.original;
+
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            asChild
+            className="hover:bg-black-300 hover:border hover:border-black-950 transition"
+          >
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="cursor-pointer">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => {
+                toast.success(`Copied ${data._id}`);
+                navigator.clipboard.writeText(data._id);
+              }}
+            >
+              Copy deal ID
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Edit deal</DropdownMenuItem>
+            <DropdownMenuItem>View payment</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    },
   },
 ];
