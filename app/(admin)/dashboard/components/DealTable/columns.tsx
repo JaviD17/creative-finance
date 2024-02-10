@@ -499,6 +499,11 @@ export const columns: ColumnDef<Doc<"deals">>[] = [
                 </DialogDescription>
               </DialogHeader>
             </ScrollArea>
+            <DialogFooter>
+              <div className="w-full cursor-pointer text-center border border-transparent hover:shadow-2xl hover:shadow-black-950 hover:border-black-950 rounded-sm hover:bg-black-300 py-1.5 transition active:scale-95">
+                Save changes
+              </div>
+            </DialogFooter>
           </DialogContent>
         </Dialog>
       );
